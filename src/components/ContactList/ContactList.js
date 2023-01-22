@@ -1,24 +1,36 @@
 import React from 'react';
 import { List, ContactCard } from './ContactList.styled';
 import PropTypes, { shape } from 'prop-types';
+import { useSelector } from 'react-redux';
+import { selectContacts, deleteContact } from 'redux/contactSlice';
+import { useDispatch } from 'react-redux';
+import { selectFilter } from 'redux/filterSlice';
 
-const ContactList = ({ contactArr, deleteContact }) => {
+const ContactList = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
+  console.log(contacts);
+  const onDeleteBtn = id => {
+    dispatch(deleteContact(id));
+  };
+
+  const getVisibleContacts = contacts.filter(contact =>
+    contact.contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
+  console.log(filter);
+  console.log(getVisibleContacts);
   return (
     <>
       <List>
-        {contactArr.map(contact => {
-          const { id, name, number } = contact;
-
+        {getVisibleContacts.map(item => {
+          const { id, contact } = item;
+          const { name, number } = contact;
           return (
             <ContactCard key={id}>
               {' '}
               {name}: {number}
-              <button
-                type="button"
-                onClick={() => {
-                  deleteContact(id);
-                }}
-              >
+              <button type="button" onClick={() => onDeleteBtn(id)}>
                 Delete
               </button>
             </ContactCard>

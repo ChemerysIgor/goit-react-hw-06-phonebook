@@ -1,15 +1,19 @@
 import { Formik, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-
+// import { addContact } from 'redux/reducer';
 import { ContactsForm, FormLabel } from './contactForm.styled';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'redux/contactSlice';
 
 const initialValues = { name: '', number: '' };
 
-const ContactForm = ({ addContact }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
+
   const formData = (values, { resetForm }) => {
-    console.log(values);
-    addContact(values);
+    dispatch(addContact(values));
+    // addContact(values);
     resetForm();
   };
   return (
