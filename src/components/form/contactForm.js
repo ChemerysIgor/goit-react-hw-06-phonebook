@@ -5,16 +5,29 @@ import { ContactsForm, FormLabel } from './contactForm.styled';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { addContact } from 'redux/contactSlice';
-
+import { useSelector } from 'react-redux';
+import { selectContacts } from 'redux/contactSlice';
 const initialValues = { name: '', number: '' };
 
 const ContactForm = () => {
   const dispatch = useDispatch();
+  const names = useSelector(selectContacts);
+  const getName = [];
+  for (const name of names) {
+    getName.push(name.contact.name.toLowerCase());
+  }
+  console.log(getName);
 
   const formData = (values, { resetForm }) => {
-    dispatch(addContact(values));
-    // addContact(values);
-    resetForm();
+    if (
+      getName.some(item => item.toLowerCase() === values.name.toLowerCase())
+    ) {
+      alert(`${values.name} is already in the list`);
+      resetForm();
+    } else {
+      dispatch(addContact(values));
+      resetForm();
+    }
   };
   return (
     <Formik

@@ -1,11 +1,11 @@
-// import { createReducer } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
 // import { addContact, deleteContact } from './actions';
+import { getStateContact } from './selectors';
+
 const contactInitialState = {
   contacts: [
     { id: 'id-1', contact: { name: 'Rosie Simpson', number: '459-12-56' } },
@@ -21,7 +21,26 @@ const contactSlice = createSlice({
   reducers: {
     addContact: {
       reducer(state, action) {
+        //  if (contacts.length !== 0) {
+        //       const inContact = contacts.some(item => {
+        //         console.log(item)
+        //         return item.name.toLowerCase() === contact.name.toLowerCase()
+        //       })
+        //       if (inContact) {
+        //         alert(`${contact.name} is already in the list`)
+        //         return  contacts
+        //       }
+
+        //     contact.id = nanoid(5);
+        //      setContacts(prevState => {
+        //         return [...prevState, contact] }
+        //       )
+        //     }
+        //   else { contact.id = nanoid(5);
+        //       setContacts([contact])
+        console.log(state.contacts);
         state.contacts.push(action.payload);
+        console.log(action.payload.contact);
       },
       prepare(contact) {
         return {

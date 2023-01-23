@@ -8,6 +8,7 @@ import {Div} from './Div.styled'
 
 
 export default function App() {
+  
 // const [contacts, setContacts] = useState( JSON.parse(localStorage.getItem('contacts')) ?? [])
 //   const [filter, setFilter] = useState("")
  

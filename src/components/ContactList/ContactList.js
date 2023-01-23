@@ -10,7 +10,7 @@ const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
-  console.log(contacts);
+
   const onDeleteBtn = id => {
     dispatch(deleteContact(id));
   };
@@ -18,8 +18,7 @@ const ContactList = () => {
   const getVisibleContacts = contacts.filter(contact =>
     contact.contact.name.toLowerCase().includes(filter.toLowerCase())
   );
-  console.log(filter);
-  console.log(getVisibleContacts);
+
   return (
     <>
       <List>
