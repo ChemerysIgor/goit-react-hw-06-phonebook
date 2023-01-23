@@ -1,10 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
-import { useSelector } from 'react-redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-// import { addContact, deleteContact } from './actions';
-import { getStateContact } from './selectors';
 
 const contactInitialState = {
   contacts: [
@@ -38,9 +35,8 @@ const contactSlice = createSlice({
         //     }
         //   else { contact.id = nanoid(5);
         //       setContacts([contact])
-        console.log(state.contacts);
+
         state.contacts.push(action.payload);
-        console.log(action.payload.contact);
       },
       prepare(contact) {
         return {
